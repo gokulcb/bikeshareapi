@@ -11,8 +11,8 @@ import numpy as np
 import pandas as pd
 from fastapi import APIRouter, HTTPException, Body
 from fastapi.encoders import jsonable_encoder
-from bikeshare_model import __version__ as model_version
-from bikeshare_model.predict import make_prediction
+from bikerental_model import __version__ as model_version
+from bikerental_model.predict import make_prediction
 
 from app import __version__, schemas
 from app.config import settings
@@ -63,7 +63,7 @@ example_input = {
 @api_router.post("/predict", response_model=schemas.PredictionResults, status_code=200)
 async def predict(input_data: schemas.MultipleDataInputs = Body(..., example=example_input)) -> Any:
     """
-    Survival predictions with the bikeshare_model
+    predictions with the bikeshare_model
     """
 
     input_df = pd.DataFrame(jsonable_encoder(input_data.inputs))
